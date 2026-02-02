@@ -1,0 +1,172 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JYT KLA JA GESE MAAR SE DIT WEER</title>
+
+<style>
+/* 🌈 RGB BACKGROUND */
+body {
+  font-family: 'Times New Roman', Times, serif;
+  background: linear-gradient(270deg, #ff0080, #ff8c00, #40e0d0, #8a2be2);
+  background-size: 800% 800%;
+  animation: rgbBackground 10s ease infinite;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  overflow: hidden;
+}
+
+@keyframes rgbBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 💌 CARD */
+.card {
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 450px;
+  margin: auto;
+  color: #333;
+  box-shadow: 0 0 30px rgba(255,0,150,0.7);
+  animation: floatCard 3s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  50% { transform: translateY(-10px); }
+}
+
+img {
+  width: 200px;
+  border-radius: 12px;
+}
+
+/* 🔘 BUTTONS */
+button {
+  margin: 15px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s;
+  position: relative;
+}
+
+/* 💗 NEON GLOW */
+.yes-button,
+.no-button {
+  background: #ff1493;
+  color: white;
+  box-shadow: 0 0 15px #ff1493, 0 0 40px #ff69b4;
+  animation: neonPulse 1.5s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { box-shadow: 0 0 15px #ff1493; }
+  to { box-shadow: 0 0 35px #ff69b4; }
+}
+
+/* 💕 HEARTS */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-120px) scale(1.5); }
+}
+
+/* ✨ SPARKLES */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: pink;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleFade 0.8s forwards;
+}
+
+@keyframes sparkleFade {
+  to { opacity: 0; transform: scale(2); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Be My <span style="color:#ff1493;">Valentine</span> 💖</h1>
+
+  <img src="https://media.giphy.com/media/8QbwUh40Hl96yMgvOx/giphy.gif" alt="Valentine Gif">
+
+  <p>You know the answer 😌</p>
+
+  <div>
+    <button class="yes-button">Yes</button>
+    <button class="no-button">No</button>
+  </div>
+</div>
+
+<script>
+const yesButton = document.querySelector('.yes-button');
+const noButton = document.querySelector('.no-button');
+
+/* 💕 YES = HEART EXPLOSION */
+yesButton.addEventListener('click', (e) => {
+  for (let i = 0; i < 15; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = '💖';
+    heart.style.left = e.clientX + Math.random() * 40 - 20 + 'px';
+    heart.style.top = e.clientY + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+  alert("YAYYY 💘 Best decision ever!");
+});
+
+/* 🏃‍♀️ NO BUTTON RUNS AWAY (MOBILE + DESKTOP) */
+function moveNoButton() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+  noButton.style.position = 'absolute';
+  noButton.style.left = x + 'px';
+  noButton.style.top = y + 'px';
+}
+
+noButton.addEventListener('touchstart', moveNoButton);
+noButton.addEventListener('click', moveNoButton);
+
+/* ✨ SPARKLES FOLLOW TOUCH + MOUSE */
+function createSparkle(x, y) {
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = x + 'px';
+  sparkle.style.top = y + 'px';
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+}
+
+document.addEventListener('mousemove', (e) => {
+  createSparkle(e.pageX, e.pageY);
+});
+
+document.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+  createSparkle(touch.pageX, touch.pageY);
+});
+</script>
+
+</body>
+</html>
+
+
